@@ -127,8 +127,8 @@ public class BookService {
 
         try (Connection connection = DriverManager.getConnection(URL, USER, PASSWORD);
              PreparedStatement statement = connection.prepareStatement(sql)) {
-
-            statement.setInt(1, id);
+             statement.setInt(1, id);
+             statement.executeUpdate();
 
         } catch (SQLException e) {
             System.err.println("Error deleting book: " + e.getMessage());
