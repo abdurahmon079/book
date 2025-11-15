@@ -12,6 +12,14 @@ public class BookService {
     private static final String USER = "postgres";
     private static final String PASSWORD = "abdurahmon2006";
 
+    static {
+        try {
+            Class.forName("org.postgresql.Driver");
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException("PostgreSQL Driver not found", e);
+        }
+    }
+
     // CREATE
     public static void createBook(String name, int pages, String author) throws SQLException {
         Book book = Book.builder()
