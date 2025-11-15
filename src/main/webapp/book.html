@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>📚 Book Manager</title>
+
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            font-family: 'Poppins', sans-serif;
+            color: white;
+            background: linear-gradient(-45deg, #1a2a6c, #b21f1f, #fdbb2d, #0f2027);
+            background-size: 400% 400%;
+            animation: gradientBG 15s ease infinite;
+        }
+
+        @keyframes gradientBG {
+            0% {background-position:0% 50%;}
+            50% {background-position:100% 50%;}
+            100% {background-position:0% 50%;}
+        }
+
+        header {
+            text-align: center;
+            padding: 30px;
+            font-size: 36px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-shadow: 0 0 15px rgba(255,255,255,0.5);
+            background: rgba(0,0,0,0.2);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 30px auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 25px;
+        }
+
+        .menu-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
+            border-radius: 18px;
+            padding: 25px 15px;
+            text-align: center;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: 600;
+            color: #fff;
+            transition: 0.3s;
+            border: 1px solid rgba(255,255,255,0.2);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .menu-card i {
+            font-size: 50px;
+            margin-bottom: 12px;
+            color: #ffeb3b;
+            transition: transform 0.3s, color 0.3s;
+        }
+
+        .menu-card:hover {
+            transform: translateY(-7px);
+            background: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+
+        .menu-card:hover i {
+            color: #00f2fe;
+            transform: scale(1.2);
+        }
+
+        .form-card {
+            display: none;
+            background: rgba(0,0,0,0.4);
+            backdrop-filter: blur(18px);
+            border-radius: 22px;
+            padding: 35px;
+            max-width: 450px;
+            margin: 40px auto;
+            color: #fff;
+            border: 1px solid rgba(255,255,255,0.2);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.35);
+            animation: fade .4s ease;
+        }
+
+        :target.form-card { display: block; }
+
+        @keyframes fade { from { opacity: 0; transform: translateY(20px);} to {opacity:1; transform:translateY(0);} }
+
+        h3 { margin-top: 0; color: #ff6ec7; text-align: center; font-size: 26px; }
+
+        input {
+            width: 100%;
+            padding: 14px;
+            margin: 12px 0;
+            border-radius: 12px;
+            border: none;
+            background: rgba(255,255,255,0.15);
+            color: #fff;
+            font-size: 16px;
+        }
+
+        input::placeholder { color: #e0e0e0; }
+
+        button {
+            padding: 14px 20px;
+            border-radius: 12px;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            color: white;
+            margin-top: 8px;
+            width: 100%;
+            transition: 0.3s;
+        }
+
+        .btn { background: linear-gradient(135deg, #4facfe, #00f2fe); }
+        .btn-edit { background: linear-gradient(135deg, #43e97b, #38f9d7); }
+        .btn-danger { background: linear-gradient(135deg, #f85032, #e73827); }
+
+        table {
+            width: 100%;
+            margin-top: 15px;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 12px;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+        }
+
+        tr:hover { background: rgba(255,255,255,0.1); }
+
+    </style>
+</head>
+<body>
+
+<header>📚 Book Manager</header>
+
+<div class="container">
+    <a class="menu-card" href="/addBook.jsp">
+        <i class="fa-solid fa-book-medical"></i>
+        Add Book
+    </a>
+    <a class="menu-card" href="/deleteBook.jsp">
+        <i class="fa-solid fa-trash"></i>
+        Delete Book
+    </a>
+    <a class="menu-card" href="/findAllBooks.jsp">
+        <i class="fa-solid fa-books"></i>
+        Find All Books
+    </a>
+    <a class="menu-card" href="/findBookById.jsp">
+        <i class="fa-solid fa-magnifying-glass-book"></i>
+        Find Book By ID
+    </a>
+    <a class="menu-card" href="/updateBook.jsp">
+        <i class="fa-solid fa-pen-to-square"></i>
+        Update Book
+    </a>
+</div>
+
+<!-- ADD BOOK FORM -->
+<form id="add" class="form-card" action="/books" method="post">
+    <h3>Add Book</h3>
+    <input type="text" name="title" placeholder="Title">
+    <input type="number" name="pages" placeholder="Pages">
+    <input type="text" name="author" placeholder="Author">
+    <button type="submit" class="btn">Add</button>
+</form>
+
+<!-- DELETE BOOK FORM -->
+<form id="delete" class="form-card" action="/books" method="post" onsubmit="this._method.value='delete'">
+    <input type="hidden" name="_method" value="delete">
+    <h3>Delete Book</h3>
+    <input type="number" name="id" placeholder="Book ID">
+    <button type="submit" class="btn-danger">Delete</button>
+</form>
+
+<!-- FIND BY ID FORM -->
+<form id="find" class="form-card" action="/books" method="get">
+    <h3>Find Book By ID</h3>
+    <input type="number" name="id" placeholder="Book ID">
+    <button type="submit" class="btn">Find</button>
+</form>
+
+<!-- FIND ALL BOOKS -->
+<div id="all" class="form-card">
+    <h3>Find All Books</h3>
+    <a href="/books"><button type="button" class="btn">Show All</button></a>
+</div>
+
+<!-- UPDATE BOOK FORM -->
+<form id="update" class="form-card" action="/books" method="post" onsubmit="this._method.value='put'">
+    <input type="hidden" name="_method" value="put">
+    <h3>Update Book</h3>
+    <input type="number" name="id" placeholder="Book ID">
+    <input type="text" name="title" placeholder="New Title">
+    <input type="number" name="pages" placeholder="New Pages">
+    <input type="text" name="author" placeholder="New Author">
+    <button type="submit" class="btn-edit">Update</button>
+</form>
+
+</body>
+</html>
